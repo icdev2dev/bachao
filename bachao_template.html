@@ -1,0 +1,388 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        padding-top: 0px;
+        padding-right: 40px;
+        padding-left: 40px;
+      }
+
+      table { border-style: solid; }
+      td {
+        padding: 10px;
+      }
+
+      h1, h2, h3, h4 {margin: 1em 0 .5em; line-height: 1.25;}
+      h1 {font-size: 2em;}
+      h2 {font-size: 1.5em;}
+      h3 {font-size: 1.2em;}
+
+      input[type=number] { width: 80px; }
+
+      .log_warn {color: orange;}
+      .log_error {color: red; background: antiquewhite;}
+    </style>
+  </head>
+  <body>
+    <h1>BACHAO!</h1>
+    <h2> Social Recovery of your internet identities </h2>
+
+    <p> The <b>TLDR;</b> is that give the program a secret phrase and it gives you
+      a set of key shares in form of six tokens. You distribute those tokens to your friends/fam.
+      At the time of recovery, you ask your friends/fam for the value encoded
+      in the tokens. Once you meet the threshold number of tokens, you can
+      recover the secret phrase and hence your identity.
+    <p>
+    <h1> Generate Tokens </h1>
+    <form>
+      <table align="center">
+        <tr>
+
+	  <td>
+
+	    <label for="seedtype">Choose a seed type:</label>
+	    <select id="seedtype" name="Seed Type">
+	      <option value="ICI">Internet Computer Identity</option>
+	    </select>
+
+          </td>
+	  <td>
+	    <label for="seedtypeversion">Choose a seed type version:</label>
+	    <select id="seedtypeversion" name="Seed Type Version">
+	      <option value="1">1</option>
+	    </select>
+	    
+	  </td>
+        </tr>
+	<tr>
+	  <td>
+            Label on Tokens:
+            <input type="text" id="label" value="ici01">
+          </td>
+
+	  <td>
+            Exact Number of Tokens required for unlocking secret:
+            <input type="text" id="threshold" value="3">
+          </td>
+        </tr>
+	
+        <tr>
+          <td colspan="3" >
+            Secret:
+	    <pre><textarea id="secret" rows="3" cols="70"></textarea></pre>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center">
+	    <p> Javascript is just slow for large mathematical calculations. Be prepared to wait for
+	     the tokens  to be generated. Click on Wait if prompted by the browser.
+	    <p>
+
+            <input type="button" onclick="generateKeys()" value="Generate Tokens">
+
+          </td>
+        </tr>
+	<tr>
+	</tr>
+        <tr><td colspan="3">Generated Tokens:</div></td></tr>
+      <tr>
+	<td>
+	  <div id="qrcode-0">
+	  </div>
+      	</td>
+	<td>
+	  <div id="qrcode-1">
+	  </div>
+	</td>
+	<td>
+	  <div id="qrcode-2">
+	  </div>
+	</td>
+	<td>
+	  <div id="qrcode-3">
+	  </div>
+	</td>
+	<td>
+	  <div id="qrcode-4">
+	  </div>
+	</td>
+	<td>
+	  <div id="qrcode-5">
+	  </div>
+	</td>
+
+      </tr>
+
+        <tr><td colspan="3"><div id="splitLog"></div></td></tr>
+      </table>
+    </form>
+
+
+
+
+   <h1> TEST GENERATED TOKENS </h1>
+   <h2> 1. Print and Cut the tokens</h2>
+   <table>
+     <tr>
+       <td>
+	 <img src="assets/printandcuttokens.jpg" alt="Print and Cut Tokens" width="500" height="150">
+       </td>
+       
+     </tr>
+   </table>
+   <h2> 2. Scan the printed tokens through phone to see if the phone can SEE the value encoded in the token </h2>
+
+   <table>
+     <tr>
+       <th> Token </th>
+       <th> What your phone should see </th>
+     </tr>
+     
+     <tr>
+       <td>
+	  <div id="vqrcode-0">
+	  </div>
+       </td>
+       <td>
+	  <div id="vqrcodetxt-0">
+	  </div>
+       </td>
+     </tr>
+
+     <tr>
+       <td>
+	  <div id="vqrcode-1">
+	  </div>
+       </td>
+       <td>
+	  <div id="vqrcodetxt-1">
+	  </div>
+       </td>
+     </tr>
+     <tr>
+       <td>
+	  <div id="vqrcode-2">
+	  </div>
+       </td>
+       <td>
+	  <div id="vqrcodetxt-2">
+	  </div>
+       </td>
+     </tr>
+
+     <tr>
+       <td>
+	  <div id="vqrcode-3">
+	  </div>
+       </td>
+       <td>
+	  <div id="vqrcodetxt-3">
+	  </div>
+       </td>
+     </tr>
+
+     <tr>
+       <td>
+	  <div id="vqrcode-4">
+	  </div>
+       </td>
+       <td>
+	  <div id="vqrcodetxt-4">
+	  </div>
+       </td>
+     </tr>
+     <tr>
+       <td>
+	  <div id="vqrcode-5">
+	  </div>
+       </td>
+       <td>
+	  <div id="vqrcodetxt-5">
+	  </div>
+       </td>
+     </tr>
+
+     
+
+	    
+   </table>
+   
+    <h1>Recover your identity</h1>
+
+    Use this form to both test your recovery mechanisms as well as actually recover your identity when you have lost your primary authentication mechanisms. Combine the shared keys and extract the secret. <i>You must
+    provide exactly number of shared tokens keys that you specified required for recovery when the tokens were created.</i> If more (or
+    less) tokens are provided, the secret recovery WILL fail (possibly by yielding
+    the wrong secret). 
+
+
+    <p>
+    <form>
+      <table align="center">
+        <tr>
+          <td>
+            Enter the keys here, one per line:<br/>
+            <pre><textarea id="keys" rows="10" cols="70"></textarea></pre>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <input type="button" onclick="combineKeys()" value="Combine Keys">
+          </td>
+        </tr>
+        <tr>
+          <td align="center"> 	    
+            Secret: 	    <pre><textarea id="combined" rows="3" cols="70" readonly></textarea></pre> 
+          </td>
+        </tr>
+        <tr><td colspan="3"><div id="combineLog"></div></td></tr>
+      </table>
+    </form>
+
+    <h1>Details</h1>
+
+
+    To contribute to this project: <a href="https://github.com/icdev2dev/bachao">
+      https://github.com/icdev2dev/bachao</a>
+
+    <p>Version:
+// #include "version.txt"
+
+    <script>
+// #include "qrcode.min.js"
+// #include "bundle.js"
+
+
+    function logTo(elem) {
+      ['log','debug','info','warn','error'].forEach(function (verb) {
+        var orig = "orig_" + verb;
+        console[orig] = console[verb];
+        console[verb] = (function (method, verb, elem) {
+          return function () {
+            method.apply(console, arguments);
+            var msg = document.createElement('div');
+            msg.classList.add("log_" + verb);
+            msg.textContent = verb + ': ' + Array.prototype.slice.call(arguments).join(' ');
+            elem.appendChild(msg);
+          };
+        })(console[verb], verb, elem);
+      });
+    }
+
+    function logRestore() {
+      ['log','debug','info','warn','error'].forEach(function (verb) {
+        var orig = "orig_" + verb;
+        console[verb] = console[orig];
+      });
+    }
+
+    function clearLogs(id) {
+      var node = document.querySelector(id);
+      while (node.hasChildNodes()) {
+        node.removeChild(node.lastChild);
+      }
+    }
+
+    function generateKeys() {
+      clearLogs('#splitLog');
+      logTo(document.querySelector('#splitLog'));
+
+
+      var numShares = 6;
+	var seedtype = document.getElementById("seedtype").value.trim();
+	var seedtypeversion = document.getElementById("seedtypeversion").value.trim();
+
+	var label    = document.getElementById("label").value.trim();
+	var threshold    = document.getElementById("threshold").value.trim();
+
+      var secret    = document.getElementById("secret").value;
+
+
+      splitSecrets = secret.split(' ');
+
+      compressedSeedPhrase = splitSecrets.slice(1).map (function (e) {
+	    if (e.length < 4) {
+		return e+' ';
+	    }
+	    return e.substr(0,4);
+      }).join('');
+	
+      secret = seedtype + ':' + seedtypeversion +  ' ' + splitSecrets[0] + ' ' + compressedSeedPhrase;
+
+      var hexInput  = false;
+
+	
+	try {
+	    var elem = "";
+//        var elem = document.getElementById("generatedKeys");
+        var elem2 = document.getElementById("keys");
+//        elem.value = "";
+        elem2.value = "";
+
+        var s = new ssss.SSSS(parseInt(threshold), parseInt(numShares), hexInput);
+        var keys = s.split(secret, label);
+
+
+	keys.map(function (e, i) {
+	    new QRCode(document.getElementById("qrcode-"+i), {
+		text: e,
+		width: 200,
+		height: 200,
+		colorDark : "#5868bf",
+		colorLight : "#ffffff",
+		correctLevel : QRCode.CorrectLevel.M
+            });
+
+	    new QRCode(document.getElementById("vqrcode-"+i), {
+		text: e,
+		width: 50,
+		height: 50,
+		colorDark : "#5868bf",
+		colorLight : "#ffffff",
+		correctLevel : QRCode.CorrectLevel.M
+            });
+	    document.getElementById("vqrcodetxt-"+i).innerHTML = e;
+    
+	  });  
+	
+
+	  
+        elem.value = keys.join("\n");
+        elem2.value = keys.slice(0, threshold).join("\n");
+      } catch (e) {
+        console.error(e);
+      } finally {
+        logRestore();
+      }
+    }
+
+    function combineKeys() {
+
+	
+	
+      clearLogs('#combineLog');
+      logTo(document.querySelector('#combineLog'));
+
+      try {
+          var hexOutput  = false;
+        document.getElementById("combined").value = "";
+        var keyTxt = document.getElementById("keys").value;
+        var keys = keyTxt.split("\n").filter(function(key) {
+          return key.length > 2;
+        });
+        var s = new ssss.SSSS(keys.length, 0, hexOutput);
+        var secret = s.combine(keys);
+        secret = s.processSecret(secret)
+	  
+	  
+        document.getElementById("combined").value = secret;
+      } catch (e) {
+        console.error(e);
+      } finally {
+        logRestore();
+      }
+    }
+
+    </script>
+  </body>
+</html>
