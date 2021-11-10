@@ -16,4 +16,4 @@ Internet Computer's Internet Identity (http://identity.ic0.app/) provides a mech
 
 |    Generate Tokens    |    Test Tokens    |    Recover Secret    |
 | --------------------- | ----------------- | -------------------- |
-| ![Step 1 of 3][https://github.com/icdev2dev/bachao/assets/bachao1of3.jpg]|![Step 2 of 3][https://github.com/icdev2dev/bachao/assets/bachao2of3.jpg]|![Step 3 of 3][https://github.com/icdev2dev/bachao/assets/bachao3of3.jpg]|
+| ![Step 1 of 3][https://github.com/icdev2dev/bachao/blob/main/assets/bachao1of3.jpg]|![Step 2 of 3][https://github.com/icdev2dev/bachao/blob/main/assets/bachao2of3.jpg]|![Step 3 of 3][https://github.com/icdev2dev/bachao/blob/main/assets/bachao3of3.jpg]|
