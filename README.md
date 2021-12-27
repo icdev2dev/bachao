@@ -1,4 +1,4 @@
-THIS SOFTWARE IS PROVIDED AS-IS. DO YOUR OWN DUE DILIGENCE. NO GUARANTEES - IMPLIED OR OTHERWISE. SEE LICENSE FOR DETAILS. ALWAYS TEST RECOVERY MECHANISMS PERIODICALLY.
+YOU EXPRESSLY ACKNOWLEDGE AND AGREE THAT USE OF THESE INSTRUCTIONS IS ARE YOUR SOLE RISK. AUTHORS OF THESE INSTRUCTIONS SHALL NOT BE LIABLE FOR DAMAGES OF ANY TYPE, WHETHER DIRECT OR INDIRECT. THIS SOFTWARE IS PROVIDED AS-IS. DO YOUR OWN DUE DILIGENCE. NO GUARANTEES - IMPLIED OR OTHERWISE. SEE LICENSE FOR DETAILS. ALWAYS TEST RECOVERY MECHANISMS PERIODICALLY.
 
 # Use Case
 Bachao is intended to solve for the primary use case of when I lose my internet identity's primary authentication mechanisms (yubi key, phone, computer etc) either through accident or theft. Essentially I would inform a set of my trusted friends and family about my internet identity in anticipation of this loss. When such a loss occurs, a subset of my trusted friends/family can vouch for my identity and my internet identity can be restored.
